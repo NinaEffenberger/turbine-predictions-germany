@@ -17,8 +17,39 @@ Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.
 ### Full folder structure
     .
     ├── ...
-    ├── test                    # Test files (alternatively `spec` or `tests`)
-    │   ├── benchmarks          # Load and stress tests
-    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    ├── data                    # data folder
+    │   ├── ERA5
+    │   │   ├── germany_wind_2011  # yearly ERA5 files
+    │   │   ├── ...
+    │   │   └── germany_wind_2023 
+    │   ├── extracted_wind_speeds         # store extracted wind speeds
+    │   │   ├── ERA5
+    │   │   └── MPI
+    │   │       ├── historical
+    │   │       ├── past
+    │   │       │   ├── SSP126
+    │   │       │   ├── SSP245
+    │   │       │   ├── SSP370
+    │   │       │   └── SSP585
+    │   │       ├── SSP126
+    │   │       ├── SSP245
+    │   │       ├── SSP370
+    │   │       └── SSP585
+    │   ├── forecasts_era5
+    │   ├── hyperparams
+    │   ├── original         # store downloaded CMIP6
+    │   │   ├── historical
+    │   │   ├── past
+    │   │   │   ├── SSP126
+    │   │   │   ├── SSP245
+    │   │   │   ├── SSP370
+    │   │   │   └── SSP585
+    │   │   ├── SSP126
+    │   │   ├── SSP245
+    │   │   ├── SSP370
+    │   │   └── SSP585
+
+
+
     │   └── unit                # Unit tests
     └── ...
