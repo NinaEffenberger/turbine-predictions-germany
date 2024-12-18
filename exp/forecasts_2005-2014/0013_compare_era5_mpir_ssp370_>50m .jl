@@ -76,7 +76,7 @@ filtered_df = CSV.read(
 indices = findall(row -> row.hub_height > 50, eachrow(filtered_df))
 
 tsos = CSV.read(
-    "data/power_gen/2015-2023-sum4tso-6hourly.csv",
+    "data/power_gen/tso_power_generation.csv",
     delim = ';',
     DataFrame,
 )

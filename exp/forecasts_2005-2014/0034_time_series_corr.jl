@@ -26,7 +26,7 @@ era5_orig = CSV.read("data/forecasts_era5/0032_era5_orig.csv", DataFrame).vector
 era5_turbines =
     CSV.read("data/forecasts_era5/0032_era5_turbines.csv", DataFrame).vector
 tsos = CSV.read(
-    "data/power_gen/2015-2023-sum4tso-6hourly.csv",
+    "data/power_gen/tso_power_generation.csv",
     delim = ';',
     DataFrame,
 )

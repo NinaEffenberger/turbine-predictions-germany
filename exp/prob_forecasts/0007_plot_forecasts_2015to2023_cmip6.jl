@@ -59,7 +59,7 @@ era5_turbines =
         DataFrame,
     ).vector
 
-tsos = CSV.read("data/2015-2023-sum4tso-6hourly.csv", delim = ';', DataFrame)
+tsos = CSV.read("data/tso_power_generation.csv", delim = ';', DataFrame)
 true_generation = tsos[!, "power"]
 
 factor_ssp126_orig = cumsum(ssp126_orig)[365*4] / cumsum(true_generation)[365*4]

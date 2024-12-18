@@ -105,26 +105,14 @@ line1 = lines!(
 #save("plots/0034southern_germany_8000.pdf", f)
 display(f)
 
-#daily values
-chunks = [all_tsos[i:i+95] for i = 1:96:length(all_tsos)-95]
-sums = [sum(chunk) for chunk in chunks]
-df = DataFrame(power = sums)
-file_path = "data/power_gen/2011-2014-sum4tso-daily.csv"
-CSV.write(file_path, df)
 
 chunks = [all_tsos[i:i+23] for i = 1:24:length(all_tsos)-23]
 sums = [sum(chunk) for chunk in chunks]
 df = DataFrame(power = sums)
-file_path = "data/power_gen/2011-2014-sum4tso-6hourly.csv"
+file_path = "data/power_gen/tso_power_generation.csv"
 CSV.write(file_path, df)
 
 # power generation after 2015
-amprion = CSV.read(
-    "data/power_gen/amprion/winddaten-01.01.2010 00_00.csv",
-    delim = ';',
-    DataFrame,
-)
-
 generation_2015_2023 = CSV.read(
     "data/power_gen/Actual_generation_201501010000_202401010000_Hour.csv",
     delim = ';',
@@ -144,5 +132,5 @@ wind_power = parse.(Float64, wind_power)
 chunks = [wind_power[i:i+5] for i = 1:6:length(wind_power)-5]
 sums = [sum(chunk) for chunk in chunks]
 df = DataFrame(power = sums)
-file_path = "data/power_gen/2015-2023-sum4tso-6hourly.csv"
+file_path = "data/power_gen/smard_power_generation.csv"
 CSV.write(file_path, df)

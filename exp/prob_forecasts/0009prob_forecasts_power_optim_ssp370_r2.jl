@@ -32,7 +32,7 @@ lats_turbines =
     (maximum(latitudes_turbines) - minimum(latitudes_turbines))
 
 
-tsos = CSV.read("data/2015-2023-sum4tso-6hourly.csv", delim = ';', DataFrame)
+tsos = CSV.read("data/tso_power_generation.csv", delim = ';', DataFrame)
 
 
 py"""

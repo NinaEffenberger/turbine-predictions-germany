@@ -38,7 +38,7 @@ r3_orig_wind_speeds = hcat(
 )
 
 tsos = CSV.read(
-    "data/power_gen/2015-2023-sum4tso-6hourly.csv",
+    "data/power_gen/tso_power_generation.csv",
     delim = ';',
     DataFrame,
 )
