@@ -13,6 +13,8 @@ The links to all TSO datasets can be found [here](https://open-power-system-data
 
 Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.smard.de/en/downloadcenter/download-market-data/). For simplicity, the SMARD data for 2015 to 2023 is provided in data/smard_power_generation.csv. 
 
+Turbine locations in Germany are from [Manske and Schmiedt, 2023](https://zenodo.org/records/8188601)
+
 
 ### Full folder structure
     .
@@ -26,7 +28,7 @@ Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.
     │   │   ├── ERA5
     │   │   └── MPI
     │   │       ├── historical
-    │   │       ├── past
+    │   │       ├── past      # until 2023
     │   │       │   ├── SSP126
     │   │       │   ├── SSP245
     │   │       │   ├── SSP370
@@ -39,7 +41,7 @@ Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.
     │   ├── hyperparams
     │   ├── original         # store downloaded CMIP6
     │   │   ├── historical
-    │   │   ├── past
+    │   │   ├── past        # until 2023
     │   │   │   ├── SSP126
     │   │   │   ├── SSP245
     │   │   │   ├── SSP370
@@ -48,6 +50,55 @@ Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.
     │   │   ├── SSP245
     │   │   ├── SSP370
     │   │   └── SSP585
+    │   ├── power_forecasts         # store generated predictions from CMIP6
+    │   │   ├── historical
+    │   │   ├── past        # until 2023
+    │   │   │   ├── SSP126
+    │   │   │   ├── SSP245
+    │   │   │   ├── SSP370
+    │   │   │   └── SSP585
+    │   │   ├── SSP126
+    │   │   │   ├── orig 
+    │   │   │   └── turbines
+    │   │   ├── SSP245
+    │   │   │   ├── orig 
+    │   │   │   └── turbines
+    │   │   ├── SSP370
+    │   │   │   ├── orig 
+    │   │   │   └── turbines
+    │   │   └── SSP585
+    │   │       ├── orig 
+    │   │       └── turbines
+    │   ├── power_gen         # actual power generation reported by TSOs
+    │   │   ├── 50hertz 
+    │   │   ├── amprion
+    │   │   ├── tennet
+    │   │   └── transnet 
+    │   ├── prob_extracted_mean         # mean wind speed predictions at turbine locations 
+    │   │   ├── historical
+    │   │   ├── past        # until 2023
+    │   │   │   ├── SSP126
+    │   │   │   ├── SSP245
+    │   │   │   ├── SSP370
+    │   │   │   └── SSP585
+    │   │   ├── SSP126
+    │   │   ├── SSP245
+    │   │   ├── SSP370
+    │   │   └── SSP585
+    │   ├── prob_extracted_var         # variance wind speed predictions at turbines 
+    │   │   ├── historical
+    │   │   ├── past        # until 2023
+    │   │   │   ├── SSP126
+    │   │   │   ├── SSP245
+    │   │   │   ├── SSP370
+    │   │   │   └── SSP585
+    │   │   ├── SSP126
+    │   │   ├── SSP245
+    │   │   ├── SSP370
+    │   │   └── SSP585
+    │   ├── turbine_locations         # yearly turbine locations extracted from [Manske and Schmiedt, 2023] (https://zenodo.org/records/8188601)
+
+    
 
 
 
