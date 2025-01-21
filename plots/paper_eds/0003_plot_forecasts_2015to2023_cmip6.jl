@@ -1,3 +1,6 @@
+"""
+Generate figure of 2015-2023 predictions using CMIP6 and ERA5, location-aware and non location-aware relative to actual power generation as reported by SMARD.
+"""
 using CSV
 using DataFrames
 using AbstractGPs

@@ -1,3 +1,6 @@
+"""
+Visualization of optimal hyperparameters of historical CMIP6 data from 2011. 
+"""
 using AbstractGPs
 using KernelFunctions
 using NCDatasets

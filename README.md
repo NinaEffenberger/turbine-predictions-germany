@@ -1,5 +1,5 @@
 ## Download data
-
+All data is open-source and the corresponding licenses allow for redistribution. You can also find all data on [Zenodo](10.5281/zenodo.14699872). 
 ### ERA5
 ERA5 data can be downloaded on the [ERA5 website](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=download). The data should be stored one file per year. 
 
@@ -13,7 +13,7 @@ The links to all TSO datasets can be found [here](https://open-power-system-data
 
 Actual generation from 2015 onwards can be downloaded from [SMARD] (https://www.smard.de/en/downloadcenter/download-market-data/). For simplicity, the SMARD data for 2015 to 2023 is provided in data/smard_power_generation.csv. 
 
-Turbine locations in Germany are from [Manske and Schmiedt, 2023](https://zenodo.org/records/8188601)
+Turbine locations in Germany are from [Manske and Schmiedt, 2023](https://zenodo.org/records/8188601) and turbines are extracted and matched to a turbine from [windpowerlib](extracted_wind_speeds) in src/find_turbine.jl. 
 
 
 ### Full folder structure
@@ -96,11 +96,5 @@ Turbine locations in Germany are from [Manske and Schmiedt, 2023](https://zenodo
     │   │   ├── SSP245
     │   │   ├── SSP370
     │   │   └── SSP585
-    │   ├── turbine_locations         # yearly turbine locations extracted from [Manske and Schmiedt, 2023] (https://zenodo.org/records/8188601)
-
-    
-
-
-
-    │   └── unit                # Unit tests
-    └── ...
+    │   └──  turbine_locations         # yearly turbine locations extracted from [Manske and Schmiedt, 2023] (https://zenodo.org/records/8188601)
+    └──  ... 
