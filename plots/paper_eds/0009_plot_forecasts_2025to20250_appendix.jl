@@ -1,3 +1,6 @@
+"""
+Plot cumulative predictions between 2025 and 2050
+"""
 using CSV
 using DataFrames
 using AbstractGPs
@@ -49,6 +52,7 @@ tsos = CSV.read(
 )
 true_generation = tsos[!, "power"]
 true_generation_2023 = repeat(true_generation[end-365*4+1:end], 26)
+cumsum(true_generation[end-365*4+1:end])[end]
 
 cumsum(ssp126_orig)[end-365*4+1:end]
 
@@ -180,6 +184,40 @@ ssp126_orig_future = ssp126_orig_future.vector
 ssp585_orig_future = ssp585_orig_future.vector
 ssp370_orig_future = ssp370_orig_future.vector
 
+#final difference 
+cumsum(ssp126_orig_future ./ factor_ssp126_orig)[end] /
+cumsum(ssp126_turbines_future ./ factor_ssp126_turbines)[end]
+cumsum(ssp245_turbines_future ./ factor_ssp245_turbines)[end] /
+cumsum(ssp245_orig_future ./ factor_ssp245_orig)[end]
+cumsum(ssp370_orig_future ./ factor_ssp370_orig)[end] /
+cumsum(ssp370_turbines_future ./ factor_ssp370_turbines)[end]
+cumsum(ssp585_orig_future ./ factor_ssp585_orig)[end] /
+cumsum(ssp585_turbines_future ./ factor_ssp585_turbines)[end]
+
+
+# cumsum location-aware predictions
+cumsum(ssp126_turbines_future[end-365*4+1:end] ./ factor_ssp126_turbines)[end]
+cumsum(ssp245_turbines_future[end-365*4+1:end] ./ factor_ssp245_turbines)[end]
+cumsum(ssp370_turbines_future[end-365*4+1:end] ./ factor_ssp370_turbines)[end]
+cumsum(ssp585_turbines_future[end-365*4+1:end] ./ factor_ssp585_turbines)[end]
+
+# 5 year average
+cumsum(ssp126_turbines_future[end-(365*4*5)+1:end] ./ factor_ssp126_turbines)[end] /
+5
+cumsum(ssp245_turbines_future[end-(365*4*5)+1:end] ./ factor_ssp245_turbines)[end] /
+5
+cumsum(ssp370_turbines_future[end-(365*4*5)+1:end] ./ factor_ssp370_turbines)[end] /
+5
+cumsum(ssp585_turbines_future[end-(365*4*5)+1:end] ./ factor_ssp585_turbines)[end] /
+5
+
+# 
+cumsum(ssp126_turbines_future ./ factor_ssp126_turbines)[end]
+cumsum(ssp245_turbines_future ./ factor_ssp245_turbines)[end]
+cumsum(ssp370_turbines_future ./ factor_ssp370_turbines)[end]
+cumsum(ssp585_turbines_future ./ factor_ssp585_turbines)[end]
+cumsum(true_generation_2023)[end]
+
 with_theme(T) do
     f = Figure()
     ax = Axis(
@@ -248,10 +286,17 @@ with_theme(T) do
         linestyle = :dot,
         color = "#CC79A7",
     )
+    true_gen = lines!(
+        ax,
+        1:length(true_generation_2023),
+        cumsum(true_generation_2023),
+        #linestyle = :dot,
+        color = "black",
+    )
     Legend(
         f[0, 1],
         [
-            #true_gen,
+            true_gen,
             ssp126t,
             #ssp126,
             ssp245t,
@@ -265,7 +310,7 @@ with_theme(T) do
             #num_tur,
         ],
         [
-            #L"\mathrm{True\;(100%)}",
+            L"\mathrm{Actual\;(2023)}",
             L"\mathrm{SSP126}",
             #L"\mathrm{126\;(63,32%)}",
             L"\mathrm{SSP245}",
@@ -281,13 +326,13 @@ with_theme(T) do
         halign = :left,
         valign = :top,
         orientation = :horizontal,
-        nbanks = 1,
+        nbanks = 2,
         labelsize = 17,
         framecolor = :white,
         padding = (-35, 0, 0, 0),
         #labelsize = 15,
     )
-    save("plots/pdfs/0005_power_generation_cmip6_normalize2023.pdf", f)
+    save("plots/pdfs/0008_power_generation_cmip6_normalize2023_true23.pdf", f)
     f
 end
 

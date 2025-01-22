@@ -1,3 +1,6 @@
+"""
+Predict wind power per turbine location for Germany with SSP585 including the first and second run of the MPI model, wind speeds are extracted in 0004prob_forcasts_speed_optim_ssp585.jl. Predictions are from 2025 to 2050. Turbine data is generated in other/0002_find_turbine.jl.  
+"""
 using CSV
 using DataFrames
 using PyCall

@@ -1,6 +1,6 @@
 
 """
-Generate files that include power generation for 2011-2014 and 2015-2023 respectively. 
+Generate files that include power generation for 2011-2014 and 2015-2023 respectively. See README.md for source of original files. 
 """
 using CSV
 using DataFrames

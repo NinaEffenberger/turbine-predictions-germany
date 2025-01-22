@@ -1,3 +1,6 @@
+"""
+Plot posterior standard deviation for the four pathways in 2050. 
+"""
 using CSV
 using DataFrames
 using Statistics

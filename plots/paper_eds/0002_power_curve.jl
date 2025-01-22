@@ -1,3 +1,6 @@
+"""
+Generate plot of example power curve.
+"""
 using CSV
 using DataFrames
 using Makie

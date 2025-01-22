@@ -1,3 +1,6 @@
+"""
+Visualize number of wind turbines between 2010 and 2023. 
+"""
 using CSV
 using DataFrames
 using Makie

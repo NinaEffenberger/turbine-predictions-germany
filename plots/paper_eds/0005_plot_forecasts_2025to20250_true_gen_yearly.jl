@@ -1,3 +1,6 @@
+"""
+Generate barplot of wind power projections for 2025 to 2050. 
+"""
 using CSV
 using DataFrames
 using AbstractGPs

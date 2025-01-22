@@ -1,3 +1,6 @@
+"""
+Predict wind speed variance per turbine location for Germany with SSP245 including the first and second run of the MPI model. Predictions are for 2050 only. Hyperparameter optimization is in other/0001_hyperparam_historical.jl.
+"""
 using AbstractGPs
 using KernelFunctions
 using NCDatasets
@@ -52,18 +55,6 @@ yearly_turbines = CSV.read("data/turbines_in_2024.csv", DataFrame)
 lats_turbines = Array(yearly_turbines.y_coordinates)
 lons_turbines = Array(yearly_turbines.x_coordinates)
 
-j = 5
-u = data_u["uas"][:, :, j]
-v = data_v["vas"][:, :, j]
-u2 = data_u_2["uas"][:, :, j]
-v2 = data_v_2["vas"][:, :, j]
-u = collect(Iterators.flatten(transpose(u)))
-v = collect(Iterators.flatten(transpose(v)))
-u2 = collect(Iterators.flatten(transpose(u2)))
-v2 = collect(Iterators.flatten(transpose(v2)))
-speeds_dataset_1 = vec(sqrt.(u .^ 2 .+ v .^ 2))
-speeds_dataset_2 = vec(sqrt.(u2 .^ 2 .+ v2 .^ 2))
-
 # noise from model inputs
 k1 = k2 = Matern32Kernel()
 kron_kernel = KernelTensorProduct(k1, k2)
@@ -108,7 +99,7 @@ end
 new_X = RowVecs(hcat(lats_turbines, lons_turbines))
 
 
-years = collect(2025:2050)
+years = collect(2050:2050)
 for i in years
     print(i)
     indices_per_year = findall(x -> x == i, year.(data_u["time"][:]))
@@ -140,38 +131,16 @@ for i in years
             ) ./ 2
         fpost_opt =
             build_posterior_gp(ParameterHandling.value(θ_opt), Y, variance_y)
-        speeds = mean(fpost_opt, new_X)
+        speeds = var(fpost_opt, new_X)
         push!(loc_mean_speeds, speeds)
     end
     df = DataFrame(loc_mean_speeds, :auto)
     CSV.write(
-        "data/prob_extracted_mean/MPI/" *
+        "data/prob_extracted_var/MPI/" *
         pathway *
-        "/yearly/r1/r1_wind_speeds_turbines" *
+        "/r1_wind_speeds_turbines" *
         string(i) *
         ".csv",
         df,
-    )
-end
-
-for i in years
-    indices_per_year = findall(x -> x == i, year.(data_u["time"][:]))
-    orig_mean_speeds = Vector{Vector{Float64}}()
-    for j in collect(1:length(indices_per_year))
-        u = data_u["uas"][:, :, indices_per_year[1]-1+j]
-        v = data_v["vas"][:, :, indices_per_year[1]-1+j]
-        u = collect(Iterators.flatten(transpose(u)))
-        v = collect(Iterators.flatten(transpose(v)))
-        strength_orig = (vec(sqrt.(u .^ 2 .+ v .^ 2)))
-        push!(orig_mean_speeds, strength_orig)
-    end
-    df2 = DataFrame(orig_mean_speeds, :auto)
-    CSV.write(
-        "data/extracted_wind_speeds/MPI/" *
-        pathway *
-        "/r1_orig_wind_speeds_" *
-        string(i) *
-        ".csv",
-        df2,
     )
 end

@@ -1,3 +1,6 @@
+"""
+Predict wind power per turbine location for Germany with SSP245 including the first and second run of the MPI model, wind speeds are extracted in 0002prob_forcasts_speed_optim_ssp245.jl. Predictions are from 2025 to 2050. Turbine data is generated in other/0002_find_turbine.jl.  
+"""
 using CSV
 using DataFrames
 using PyCall
@@ -8,7 +11,7 @@ using GeoMakie, CairoMakie
 using KernelDensity
 using Suppressor
 
-pathway = "SSP126"
+pathway = "SSP245"
 directory_path = "data/extracted_wind_speeds/MPI/" * pathway
 files = readdir(directory_path, join = true)
 data_frames = Dict{String,DataFrame}()
@@ -66,7 +69,7 @@ filtered_df = CSV.read("data/turbines_in_2024.csv", DataFrame)
 lats_turbines = filtered_df.y_coordinates
 
 
-years = collect(2047:2050)
+years = collect(2040:2050)
 for year_var in years
     r3_orig_wind_speeds = data_frames["r1_orig_wind_speeds_"*string(year_var)]
     r3_orig_wind_speeds = [
@@ -100,7 +103,7 @@ for year_var in years
 end
 
 
-years = collect(2025:2050)
+years = collect(2036:2050)
 #power_r3mpi_location_over_time = []
 for year in years
     print(year)

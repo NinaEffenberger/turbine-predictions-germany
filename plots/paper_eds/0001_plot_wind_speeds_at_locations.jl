@@ -1,3 +1,6 @@
+"""
+Generate example plot of wind speeds at turbine locations in 2011 vs 2023.
+"""
 using AbstractGPs
 using KernelFunctions
 using Plots, Plots.PlotMeasures

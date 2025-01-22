@@ -1,3 +1,6 @@
+"""
+Predict wind speed variance per turbine location for Germany with SSP585 including the first and second run of the MPI model. Predictions are for 2050 only. Hyperparameter optimization is in other/0001_hyperparam_historical.jl.
+"""
 using AbstractGPs
 using KernelFunctions
 using NCDatasets
@@ -12,7 +15,7 @@ using Zygote
 using Random
 using Printf
 
-pathway = "ssp126"
+pathway = "ssp585"
 path = "data/original/"
 data_u = Dataset(
     path *

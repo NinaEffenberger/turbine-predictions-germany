@@ -1,3 +1,6 @@
+"""
+Predict wind speeds per turbine location for Germany with SSP370 including the first and second run of the MPI model. Predictions are from 2025 to 2025. Hyperparameter optimization is in other/0001_hyperparam_historical.jl.
+"""
 using AbstractGPs
 using KernelFunctions
 using NCDatasets
@@ -12,7 +15,7 @@ using Zygote
 using Random
 using Printf
 
-pathway = "ssp585"
+pathway = "ssp370"
 path = "data/original/"
 data_u = Dataset(
     path *
@@ -41,7 +44,6 @@ data_v_2 = Dataset(
     "/r2/v/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
     "r",
 )
-
 
 lon = data_u["lon"][:]
 lat = data_u["lat"][:]
@@ -109,7 +111,7 @@ end
 new_X = RowVecs(hcat(lats_turbines, lons_turbines))
 
 
-years = collect(2047:2047)
+years = collect(2025:2050)
 for i in years
     print(i)
     indices_per_year = findall(x -> x == i, year.(data_u["time"][:]))
