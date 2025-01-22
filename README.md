@@ -1,5 +1,5 @@
 ## Code structure
-
+Most of the folder names are self-explanatory. `exp` contains all data generating code. `exp\actual_power` contains all code pre-processing actual power generation data. `exp\CMIP6_forecasts_future` generates location-aware and gridded speed and power predictions for 2025 to 2050 using CMIP6. `exp\CMIP6_forecasts_past` generates location-aware and gridded speed and power predictions for 2011 to 2023 with CMIP6 data, the corresponding predictions with ERA5 data are in `exp\ERA5_forecasts`. Code for turbine mapping and hyperparameter optimization is in `exp\others`. 
 
 ## Download data
 All data is open-source and the corresponding licenses allow for redistribution. You can also find all data on [Zenodo](10.5281/zenodo.14699872). 
