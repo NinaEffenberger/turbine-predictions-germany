@@ -13,32 +13,28 @@ using Random
 using Printf
 
 pathway = "ssp245"
-path = "data/original/past/"
+folder = "data/"
 data_u = Dataset(
-    path *
-    pathway *
-    "/r1/u/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    folder *
+    "past_"*pathway*"_r1_u.nc",
     "r",
 )
 
 data_v = Dataset(
-    path *
-    pathway *
-    "/r1/v/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    folder *
+    "past_"*pathway*"_r1_v.nc",
     "r",
 )
 
 data_u_2 = Dataset(
-    path *
-    pathway *
-    "/r2/u/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    folder *
+    "past_"*pathway*"_r2_u.nc",
     "r",
 )
 
 data_v_2 = Dataset(
-    path *
-    pathway *
-    "/r2/v/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    folder *
+    "past_"*pathway*"_r2_v.nc",
     "r",
 )
 
@@ -69,7 +65,7 @@ k1 = k2 = Matern32Kernel()
 kron_kernel = KernelTensorProduct(k1, k2)
 Y = reduce(vcat, RowVecs(speeds_dataset_2))
 X = RowVecs(hcat(lats, lons))
-savepath = "data/hyperparams/"
+savepath = "data/"
 θ_opt_k1_params_σ =
     mean(CSV.read(savepath * "θ_opt_k1_params_σ" * ".csv", DataFrame).value)
 θ_opt_k2_params_σ =
@@ -115,7 +111,7 @@ for i in years
     training_set_size = length(indices_per_year)
     loc_mean_speeds = Vector{Vector{Float64}}()
     yearly_turbines = CSV.read(
-        "data/turbine_locations/turbines_in_" * string(i) * ".csv",
+        "data/turbines_in_" * string(i) * ".csv",
         DataFrame,
     )
     lats_turbines = yearly_turbines.y_coordinates

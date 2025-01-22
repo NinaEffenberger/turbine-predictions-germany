@@ -12,37 +12,30 @@ using Zygote
 using Random
 using Printf
 
-pathway = "historical"
-path = "data/original/"
+pathway = "data/historical"
 data_u = Dataset(
-    path *
-    pathway *
-    "/r1/u/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    pathway *"_r1_u.nc",
     "r",
 )
 
 data_v = Dataset(
-    path *
-    pathway *
-    "/r1/v/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    pathway *"_r1_v.nc",
     "r",
 )
 
 data_u_2 = Dataset(
-    path *
-    pathway *
-    "/r2/u/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    pathway *"_r2_u.nc",
     "r",
 )
+
 
 data_v_2 = Dataset(
-    path *
-    pathway *
-    "/r2/v/outfile_46.66667175292969_55.833335876464844_5.0_15.416666984558105.nc",
+    pathway *"_r2_v.nc",
     "r",
 )
 
-savepath = "data/hyperparams/"
+
+savepath = "data/"
 θ_opt_k1_params_σ =
     mean(CSV.read(savepath * "θ_opt_k1_params_σ" * ".csv", DataFrame).value)
 θ_opt_k2_params_σ =
@@ -121,7 +114,7 @@ for i in years
     loc_mean_speeds = Vector{Vector{Float64}}()
     loc_var_speeds = Vector{Vector{Float64}}()
     yearly_turbines = CSV.read(
-        "data/turbine_locations/turbines_in_" * string(i) * ".csv",
+        "data/turbines_in_" * string(i) * ".csv",
         DataFrame,
     )
     latitudes_turbines = yearly_turbines.y_coordinates

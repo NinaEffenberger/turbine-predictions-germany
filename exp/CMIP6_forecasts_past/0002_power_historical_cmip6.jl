@@ -18,7 +18,6 @@ for file in files
     data_frames[base_name] = df
 end
 
-data_frames
 py"""
 import windpowerlib
 import pandas as pd
@@ -54,7 +53,7 @@ function wind_speed_to_hub_height(wind, hub_height)
     return speed_hub_height
 end
 
-filtered_df = CSV.read("data/turbine_locations/turbines_in_2011.csv", DataFrame)
+filtered_df = CSV.read("data/turbines_in_2011.csv", DataFrame)
 
 pathway = "historical/"
 directory_path = "data/extracted_wind_speeds/MPI/" * pathway * "yearly"

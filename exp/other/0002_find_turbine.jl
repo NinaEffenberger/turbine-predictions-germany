@@ -67,5 +67,5 @@ for i in date_strings
     end
     df[!, :turbine_name] = turbine_names
     year = i[1:4]
-    CSV.write("data/turbine_locations/turbines_in_" * year * ".csv", df)
+    CSV.write("data/turbines_in_" * year * ".csv", df)
 end

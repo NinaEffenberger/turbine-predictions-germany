@@ -30,7 +30,7 @@ using StatsBase
 
 years = collect(2011:2023)
 for i in years
-    nc = Dataset("data/ERA5/germany_wind_" * string(i) * ".nc", "r")
+    nc = Dataset("data/era5_germany_wind_" * string(i) * ".nc", "r")
     indices_per_year = findall(x -> x == i, year.(nc["time"][:]))
     orig_mean_speeds = Vector{Vector{Float64}}()
     for j in collect(1:length(indices_per_year))
@@ -50,7 +50,7 @@ for i in years
     )
 end
 
-nc = Dataset("data/ERA5/germany_wind_2014.nc", "r")
+nc = Dataset("data/era5_germany_wind_2014.nc", "r")
 
 # Filter the DataFrame for a specific year, for example, 2021
 lon = nc["longitude"][:]
@@ -61,13 +61,13 @@ lons = reshape(permutedims(repeat(lon, 1, size(lat)[1]), [2, 1]), size(lats))
 lons = (lons .- minimum(lons)) ./ (maximum(lons) - minimum(lons))
 lats = (lats .- minimum(lats)) ./ (maximum(lats) - minimum(lats))
 
-years = collect(2022:2023)
+years = collect(2011:2023)
 for i in years
-    nc = Dataset("data/ERA5/germany_wind_" * string(i) * ".nc", "r")
+    nc = Dataset("data/era5_germany_wind_" * string(i) * ".nc", "r")
     indices_per_year = findall(x -> x == i, year.(nc["time"][:]))
     loc_mean_speeds = Vector{Vector{Float64}}()
     yearly_turbines = CSV.read(
-        "data/turbine_locations/turbines_in_" * string(i) * ".csv",
+        "data/turbines_in_" * string(i) * ".csv",
         DataFrame,
     )
     latitudes_turbines = yearly_turbines.y_coordinates
