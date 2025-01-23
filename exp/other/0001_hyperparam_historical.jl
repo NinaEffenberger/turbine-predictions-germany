@@ -11,7 +11,6 @@ using Optim  # optimization
 using Zygote
 using Random
 using Printf
-
 pathway = "data/historical"
 data_u = Dataset(
     pathway *"_r1_u.nc",

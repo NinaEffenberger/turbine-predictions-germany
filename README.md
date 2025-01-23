@@ -1,6 +1,15 @@
 ## Code structure
 Most of the folder names are self-explanatory. [exp](./exp) contains all data generating code. `exp/actual_power` contains all code pre-processing actual power generation data. `exp/CMIP6_forecasts_future` generates location-aware and gridded speed and power predictions for 2025 to 2050 using CMIP6. `exp/CMIP6_forecasts_past` generates location-aware and gridded speed and power predictions for 2011 to 2023 with CMIP6 data, the corresponding predictions with ERA5 data are in `exp/ERA5_forecasts`. Code for turbine mapping and hyperparameter optimization is in `exp/others`. 
 
+## Start environment
+Run 
+```
+using Pkg
+Pkg.activate("path/to/project")
+Pkg.instantiate()
+```
+to regenerate the Julia environment using `Project.toml` and `Manifest.toml`. 
+
 ## Download data
 All data is open-source and the corresponding licenses allow for redistribution. You can also download all pre-processed data that was used for the study, except for the actual power generation between 2011 and 2014 on [Zenodo](10.5281/zenodo.14699872). For full transparency and for cases where an analysis of a different region is of interest, we describe how data was downloaded in the following. 
 
